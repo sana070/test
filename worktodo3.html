@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="worktodo3.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<script>
+
+    function cancel() {
+        confirm("Are you sure? Once you press 'OK' details will be lost!");
+        document.getElementById("del").value = ' ';
+
+    }
+
+    function func() {
+        let item = document.getElementById("demo1").value;
+        document.getElementById("demo1").value = ' ';
+        if (item !== ' ' && item !== null) {
+            todo.push(item);
+        }
+        addTodo();
+    }
+
+
+</script>
+
+
+
+<body>
+    <div>
+        <h2 style="margin-left:20px;color:black;">Todo</h2>
+        <div class="input">
+            <p class="textbtn"><input type="text" id="demo1" placeholder="Enter a task" maxlength="20"></p>
+            <button id="demo1" class="okbtn" onclick="func()" style="background-color:green;"> ADD </button>
+            <button class="okbtn" style="background-color:orange;" onclick="cancel()" id="del">CANCEL</button>
+        </div>
+    </div>
+
+
+    <div class="todolist">
+        <div class="todo">
+            <h2>Order</h2>
+            <div class="cards" id="todocards" onclick="addDone1()">
+
+
+            </div>
+            <div class="done">
+                <h2>Work in progress</h2>
+                <div class="cards" id="wipcards">
+
+                </div>
+            </div>
+
+            <div class="done">
+                <h2>Done</h2>
+                <div class="cards" id="donecards">
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <script>
+
+
+                var todo = [];
+                var done = [];
+                var wip = [];
+
+                function addTodo() {
+                    let ar = todo.map((cur, index) => {
+                        return `<div>
+               <p class="content">${cur}</p>
+               <p><img src="path.png" class="clickbutton" onclick="eventfn(${index})"></p>
+             </div>`
+                    });
+                    let cards = document.getElementById("todocards");
+                    ar = ar.reverse();
+                    cards.innerHTML = ar.join('');
+                }
+
+
+                function eventfn(incomingIndex) {
+                    wip.push(todo[incomingIndex]);
+                    todo = todo.filter((ele, index) => index !== incomingIndex);
+                    addTodo();
+                    addDone1();
+                }
+
+
+                function addDone(incomingIndex) {
+                    let ar1 = done.map((cur, index) => {
+                        return `<div>
+               <p class="content">${cur}</p>
+               <p><img class="doneBut" src="path.png" id="demo" onclick="deleteDone(${index})"></p>
+             </div>`
+                    });
+                    ar1 = ar1.reverse();
+                    let arr1 = document.getElementById("donecards");
+                    arr1.innerHTML = ar1.join('');
+                }
+
+
+                function addDone1() {
+                    let ar2 = wip.map((cur, index) => {
+                        return `<div>
+               <p class="content">${cur}</p>
+               <p><img class="wipBut" src="path.png" id="demo" onclick="eventFunc2(${index})"></p>
+             </div>`
+                    });
+
+                    ar2 = ar2.reverse();
+                    let arr2 = document.getElementById("wipcards");
+                    arr2.innerHTML = ar2.join('');
+
+                }
+
+                function eventFunc2(incomingindex) {
+                    done.push(wip[incomingindex]);
+                    wip = wip.filter((ele, index) => index !== incomingindex);
+                    addDone1();
+                    addDone();
+                }
+
+
+                function deleteDone(incomingIndex) {
+                    document.getElementById("demo").style.color = "green";
+                    var check = confirm("Are you sure? Once the item is deleted it cannot be replaced..");
+                    if (check) {
+                        done = done.filter((value, index) => index !== incomingIndex);
+                    }
+                    addDone();
+                }
+
+
+
+
+            </script>
+
+</body>
+
+</html>
