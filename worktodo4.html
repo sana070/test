@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="worktodo3.css" type="text/css" rel="stylesheet">
+    <link href="worktodo4.css" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <title>Document</title>
 </head>
@@ -90,7 +90,11 @@
 
 
                 function eventfn(incomingIndex) {
-                    wip.push(todo[incomingIndex]);
+                    let msg=prompt("Update data in 'work in progress' "," ");
+                    let input=todo[incomingIndex];
+                    let result=input + msg;
+                   // wip.push(todo[incomingIndex]);
+                   wip.push(result);
                     todo = todo.filter((ele, index) => index !== incomingIndex);
                     addTodo();
                     addDone1();
@@ -125,7 +129,12 @@
                 }
 
                 function eventFunc2(incomingindex) {
-                    done.push(wip[incomingindex]);
+                    let msg=prompt("Update data in 'Done'");
+                    let input=wip[incomingindex];
+                    let result=input + msg;
+                    done.push(result);
+
+                   // done.push(wip[incomingindex]);
                     wip = wip.filter((ele, index) => index !== incomingindex);
                     addDone1();
                     addDone();
